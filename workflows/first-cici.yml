@@ -1,11 +1,18 @@
 name: First workflow
 on: workflow_dispatch
 jobs:
+  #job.id job의 이름 임의의 이름
   first-jobs:
+    # job이 실행 될 환경
+    # runner
     runs-on: ubuntu-latest
+
+    # steps: job 일련의 과정
     steps:
+      # - name : step의 이름
       - name: Print Greeting
         run: echo "Hello World!"
 
+      #
       - name: Print Goodbye
         run: echo " Done ! Bye"
