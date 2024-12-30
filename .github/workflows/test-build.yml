@@ -1,5 +1,14 @@
 name: Run Test And Build
-on: [push, workflow_dispatch]
+on:
+  push:
+    branches:
+      - dev
+
+  workflow_dispatch:
+    branches:
+      - dev
+      - "feat/**"
+
 jobs:
   # 1. 테스트 job
   test:
