@@ -1,30 +1,27 @@
-name: pr
-on: [pull_request]
-
+# 버전별 테스트 방법
+name: PR
+on: push
 jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      # 코드를 가져옴
-      - name: Get Codes
-        uses: actions/checkout@v4
-
-      # 의존성 파일들 설치
-      - name: Install Dependencies
-        run: npm install
-
-      # 테스트 실행
-      - name: Run Test
-        run: npm run test
-
-  build:
+  build-test:
+    strategy:
+      matrix:
+        node-version: [12, 18]
     runs-on: ubuntu-latest
     steps:
       - name: Get Codes
         uses: actions/checkout@v4
 
-      - name: Install Dependencies
+      # 노드js를 설치
+      - name: Install Nodejs
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install Deps
         run: npm install
 
-      - name: Run Build
+      - name: build
         run: npm run build
+
+      - name: test
+        run: npm run test
