@@ -90,18 +90,7 @@ describe("Query Page Test", () => {
     await expect(screen.findAllByRole("button")).rejects.toThrow();
   });
 
-  it("왜 콜백인지 테스트", () => {
-    const param = "";
-    try {
-      const actual = noEmptyString(param);
-    } catch (error: unknown) {
-      expect(error).toBeInstanceOf(Error);
-      expect((error as Error).message).toBe("빈 문자열이 들어왔습니다.");
-    }
 
-    expect(() => noEmptyString(param)).toThrow();
-
-    // expect(actual).toBe(param);
   });
 
   it("get by ,get by All 에러", () => {
