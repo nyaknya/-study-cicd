@@ -1,6 +1,6 @@
 import "@testing-library/jest-dom";
 import { render, screen, waitFor } from "@testing-library/react";
-import Query, { noEmptyString } from "./page";
+import Query from "./page";
 import { FetchDataComponent } from "../components/fetch";
 
 describe("Query Page Test", () => {
@@ -89,35 +89,32 @@ describe("Query Page Test", () => {
     expect(queryAllByRole).toHaveLength(0);
     await expect(screen.findAllByRole("button")).rejects.toThrow();
   });
+});
 
+it("get by ,get by All 에러", () => {
+  // getBy,getByAll 함수는 DOM에서 요소를 찾지 못하면 에러를 던진다.
 
-  });
+  render(<Query />);
 
-  it("get by ,get by All 에러", () => {
-    // getBy,getByAll 함수는 DOM에서 요소를 찾지 못하면 에러를 던진다.
+  try {
+    screen.getByRole("button");
+  } catch (error) {
+    expect(error).toBeInstanceOf(Error);
+  }
 
-    render(<Query />);
+  expect(() => screen.getByRole("button")).toThrow();
 
-    try {
-      screen.getByRole("button");
-    } catch (error) {
-      expect(error).toBeInstanceOf(Error);
-    }
+  // getBy -> 요소를 딱 1개만 찾음
+  // const li = screen.getByRole("listitem");
+  // getAllBy -> 요소를 여러개 찾음
+  expect(() => screen.getByRole("listitem")).toThrow();
+});
 
-    expect(() => screen.getByRole("button")).toThrow();
+it("Fetch Data Component", async () => {
+  render(<FetchDataComponent />);
 
-    // getBy -> 요소를 딱 1개만 찾음
-    // const li = screen.getByRole("listitem");
-    // getAllBy -> 요소를 여러개 찾음
-    expect(() => screen.getByRole("listitem")).toThrow();
-  });
+  const getBy = await screen.findByRole("list", {}, { timeout: 2000 });
+  screen.debug();
 
-  it("Fetch Data Component", async () => {
-    render(<FetchDataComponent />);
-
-    const getBy = await screen.findByRole("list", {}, { timeout: 2000 });
-    screen.debug();
-
-    expect(getBy).toBeInTheDocument();
-  });
+  expect(getBy).toBeInTheDocument();
 });
