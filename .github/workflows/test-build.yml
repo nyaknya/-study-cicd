@@ -3,11 +3,11 @@ on:
   push:
     branches:
       - dev
+      - "feat/**"
 
   workflow_dispatch:
     branches:
       - dev
-      - "feat/**"
 
 jobs:
   # 1. 테스트 job
