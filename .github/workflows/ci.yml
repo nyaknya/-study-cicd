@@ -6,7 +6,7 @@ on:
       - "feat/**"
 
 env:
-  NEXT_PUBLICK_API_URL: ${{secrets.NEXT_PUBLICK_API_URL}}
+  NEXT_PUBLIC_API_URL: ${{secrets.NEXT_PUBLICK_API_URL}}
 
 jobs:
   run-test:
