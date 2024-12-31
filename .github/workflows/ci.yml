@@ -6,8 +6,7 @@ on:
       - "feat/**"
 
 env:
-  NEXT_PUBLIC_API_URL: ${{secrets.NEXT_PUBLICK_API_URL}}
-
+  NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
 jobs:
   run-test:
     name: Run Test
@@ -30,7 +29,7 @@ jobs:
     name: Create PR
     runs-on: ubuntu-latest
     steps:
-      - name: Download Codes
+      - name: Downloads Codes
         uses: actions/checkout@v4
 
       - name: create pr
@@ -38,6 +37,7 @@ jobs:
         with:
           title: "chore: create pr test"
           body: "this is a test pr"
+          # merge가 될 브랜치
           base: main
-          branch: ${{github.ref}}
-          token: ${{secrets.ACCESS_TOKEN_FOR_CI}}
+          branch: ${{ github.ref }}
+          token: ${{ secrets.ACCESS_TOKEN_FOR_CI }}
